@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebMenuExpandMapper" >
+    <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebMenu" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="menu" property="menu" jdbcType="VARCHAR" />
+        <result column="menu_type" property="menuType" jdbcType="VARCHAR" />
+        <result column="showfile" property="showfile" jdbcType="VARCHAR" />
+        <result column="adminfile" property="adminfile" jdbcType="VARCHAR" />
+        <result column="news_par" property="newsPar" jdbcType="INTEGER" />
+        <result column="pro_h" property="proH" jdbcType="INTEGER" />
+        <result column="pro_w" property="proW" jdbcType="INTEGER" />
+        <result column="pro_par" property="proPar" jdbcType="INTEGER" />
+        <result column="pro_row" property="proRow" jdbcType="INTEGER" />
+        <result column="pic_h" property="picH" jdbcType="INTEGER" />
+        <result column="pic_w" property="picW" jdbcType="INTEGER" />
+        <result column="pic_par" property="picPar" jdbcType="INTEGER" />
+        <result column="pic_row" property="picRow" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="view" property="view" jdbcType="INTEGER" />
+        <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+        <result column="bid" property="bid" jdbcType="INTEGER" />
+        <result column="sid" property="sid" jdbcType="INTEGER" />
+        <result column="tid" property="tid" jdbcType="INTEGER" />
+        <result column="otherpar" property="otherpar" jdbcType="VARCHAR" />
+        <result column="picotherpar" property="picotherpar" jdbcType="VARCHAR" />
+        <result column="imgotherpar" property="imgotherpar" jdbcType="VARCHAR" />
+        <result column="download" property="download" jdbcType="INTEGER" />
+        <result column="down_par" property="downPar" jdbcType="INTEGER" />
+        <result column="down_row" property="downRow" jdbcType="INTEGER" />
+        <result column="ord" property="ord" jdbcType="INTEGER" />
+        <result column="menuredirect" property="menuredirect" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, name, menu, menu_type, showfile, adminfile, news_par, pro_h, pro_w, pro_par,
+    pro_row, pic_h, pic_w, pic_par, pic_row, sort, view, addtime, bid, sid, tid, otherpar,
+    picotherpar, imgotherpar, download, down_par, down_row, ord, menuredirect
+  </sql>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebMenu" >
+      select
+        <include refid="Base_Column_List" />
+      from web_menu
+    </select>
+</mapper>

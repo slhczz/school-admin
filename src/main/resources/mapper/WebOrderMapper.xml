@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="song" property="song" jdbcType="VARCHAR" />
+    <result column="pro" property="pro" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="zip" property="zip" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="proname" property="proname" jdbcType="VARCHAR" />
+    <result column="proprice" property="proprice" jdbcType="VARCHAR" />
+    <result column="procount" property="procount" jdbcType="VARCHAR" />
+    <result column="getid" property="getid" jdbcType="VARCHAR" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="xian" property="xian" jdbcType="VARCHAR" />
+    <result column="checks" property="checks" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sy.stu.school.pojo.po.WebOrder" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, song, pro, city, tel, zip, company, address, email, addtime, proname, proprice, 
+    procount, getid, bid, sid, tid, fid, xian, checks
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebOrderExample" >
+    delete from web_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebOrder" >
+    insert into web_order (id, name, song, 
+      pro, city, tel, zip, 
+      company, address, email, 
+      addtime, proname, proprice, 
+      procount, getid, bid, 
+      sid, tid, fid, xian, 
+      checks, content)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{song,jdbcType=VARCHAR}, 
+      #{pro,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{proname,jdbcType=VARCHAR}, #{proprice,jdbcType=VARCHAR}, 
+      #{procount,jdbcType=VARCHAR}, #{getid,jdbcType=VARCHAR}, #{bid,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{xian,jdbcType=VARCHAR}, 
+      #{checks,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebOrder" >
+    insert into web_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="song != null" >
+        song,
+      </if>
+      <if test="pro != null" >
+        pro,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="zip != null" >
+        zip,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="proname != null" >
+        proname,
+      </if>
+      <if test="proprice != null" >
+        proprice,
+      </if>
+      <if test="procount != null" >
+        procount,
+      </if>
+      <if test="getid != null" >
+        getid,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="xian != null" >
+        xian,
+      </if>
+      <if test="checks != null" >
+        checks,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="song != null" >
+        #{song,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proname != null" >
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="proprice != null" >
+        #{proprice,jdbcType=VARCHAR},
+      </if>
+      <if test="procount != null" >
+        #{procount,jdbcType=VARCHAR},
+      </if>
+      <if test="getid != null" >
+        #{getid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="xian != null" >
+        #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="checks != null" >
+        #{checks,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebOrderExample" resultType="java.lang.Integer" >
+    select count(*) from web_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.song != null" >
+        song = #{record.song,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pro != null" >
+        pro = #{record.pro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zip != null" >
+        zip = #{record.zip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.proname != null" >
+        proname = #{record.proname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proprice != null" >
+        proprice = #{record.proprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procount != null" >
+        procount = #{record.procount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getid != null" >
+        getid = #{record.getid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.xian != null" >
+        xian = #{record.xian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checks != null" >
+        checks = #{record.checks,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update web_order
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      song = #{record.song,jdbcType=VARCHAR},
+      pro = #{record.pro,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      zip = #{record.zip,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      proname = #{record.proname,jdbcType=VARCHAR},
+      proprice = #{record.proprice,jdbcType=VARCHAR},
+      procount = #{record.procount,jdbcType=VARCHAR},
+      getid = #{record.getid,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      xian = #{record.xian,jdbcType=VARCHAR},
+      checks = #{record.checks,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_order
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      song = #{record.song,jdbcType=VARCHAR},
+      pro = #{record.pro,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      zip = #{record.zip,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      proname = #{record.proname,jdbcType=VARCHAR},
+      proprice = #{record.proprice,jdbcType=VARCHAR},
+      procount = #{record.procount,jdbcType=VARCHAR},
+      getid = #{record.getid,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      xian = #{record.xian,jdbcType=VARCHAR},
+      checks = #{record.checks,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebOrder" >
+    update web_order
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="song != null" >
+        song = #{song,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        pro = #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proname != null" >
+        proname = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="proprice != null" >
+        proprice = #{proprice,jdbcType=VARCHAR},
+      </if>
+      <if test="procount != null" >
+        procount = #{procount,jdbcType=VARCHAR},
+      </if>
+      <if test="getid != null" >
+        getid = #{getid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="xian != null" >
+        xian = #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="checks != null" >
+        checks = #{checks,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebOrder" >
+    update web_order
+    set name = #{name,jdbcType=VARCHAR},
+      song = #{song,jdbcType=VARCHAR},
+      pro = #{pro,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      proname = #{proname,jdbcType=VARCHAR},
+      proprice = #{proprice,jdbcType=VARCHAR},
+      procount = #{procount,jdbcType=VARCHAR},
+      getid = #{getid,jdbcType=VARCHAR},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      xian = #{xian,jdbcType=VARCHAR},
+      checks = #{checks,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebOrder" >
+    update web_order
+    set name = #{name,jdbcType=VARCHAR},
+      song = #{song,jdbcType=VARCHAR},
+      pro = #{pro,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      proname = #{proname,jdbcType=VARCHAR},
+      proprice = #{proprice,jdbcType=VARCHAR},
+      procount = #{procount,jdbcType=VARCHAR},
+      getid = #{getid,jdbcType=VARCHAR},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      xian = #{xian,jdbcType=VARCHAR},
+      checks = #{checks,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

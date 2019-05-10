@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="menu" property="menu" jdbcType="VARCHAR" />
+    <result column="menu_type" property="menuType" jdbcType="VARCHAR" />
+    <result column="showfile" property="showfile" jdbcType="VARCHAR" />
+    <result column="adminfile" property="adminfile" jdbcType="VARCHAR" />
+    <result column="news_par" property="newsPar" jdbcType="INTEGER" />
+    <result column="pro_h" property="proH" jdbcType="INTEGER" />
+    <result column="pro_w" property="proW" jdbcType="INTEGER" />
+    <result column="pro_par" property="proPar" jdbcType="INTEGER" />
+    <result column="pro_row" property="proRow" jdbcType="INTEGER" />
+    <result column="pic_h" property="picH" jdbcType="INTEGER" />
+    <result column="pic_w" property="picW" jdbcType="INTEGER" />
+    <result column="pic_par" property="picPar" jdbcType="INTEGER" />
+    <result column="pic_row" property="picRow" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="otherpar" property="otherpar" jdbcType="VARCHAR" />
+    <result column="picotherpar" property="picotherpar" jdbcType="VARCHAR" />
+    <result column="imgotherpar" property="imgotherpar" jdbcType="VARCHAR" />
+    <result column="download" property="download" jdbcType="INTEGER" />
+    <result column="down_par" property="downPar" jdbcType="INTEGER" />
+    <result column="down_row" property="downRow" jdbcType="INTEGER" />
+    <result column="ord" property="ord" jdbcType="INTEGER" />
+    <result column="menuredirect" property="menuredirect" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, menu, menu_type, showfile, adminfile, news_par, pro_h, pro_w, pro_par, 
+    pro_row, pic_h, pic_w, pic_par, pic_row, sort, view, addtime, bid, sid, tid, otherpar, 
+    picotherpar, imgotherpar, download, down_par, down_row, ord, menuredirect
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebMenuExample" >
+    delete from web_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebMenu" >
+    insert into web_menu (id, name, menu, 
+      menu_type, showfile, adminfile, 
+      news_par, pro_h, pro_w, 
+      pro_par, pro_row, pic_h, 
+      pic_w, pic_par, pic_row, 
+      sort, view, addtime, 
+      bid, sid, tid, otherpar, 
+      picotherpar, imgotherpar, download, 
+      down_par, down_row, ord, 
+      menuredirect)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{menu,jdbcType=VARCHAR}, 
+      #{menuType,jdbcType=VARCHAR}, #{showfile,jdbcType=VARCHAR}, #{adminfile,jdbcType=VARCHAR}, 
+      #{newsPar,jdbcType=INTEGER}, #{proH,jdbcType=INTEGER}, #{proW,jdbcType=INTEGER}, 
+      #{proPar,jdbcType=INTEGER}, #{proRow,jdbcType=INTEGER}, #{picH,jdbcType=INTEGER}, 
+      #{picW,jdbcType=INTEGER}, #{picPar,jdbcType=INTEGER}, #{picRow,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{view,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{bid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{otherpar,jdbcType=VARCHAR}, 
+      #{picotherpar,jdbcType=VARCHAR}, #{imgotherpar,jdbcType=VARCHAR}, #{download,jdbcType=INTEGER}, 
+      #{downPar,jdbcType=INTEGER}, #{downRow,jdbcType=INTEGER}, #{ord,jdbcType=INTEGER}, 
+      #{menuredirect,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebMenu" >
+    insert into web_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="menu != null" >
+        menu,
+      </if>
+      <if test="menuType != null" >
+        menu_type,
+      </if>
+      <if test="showfile != null" >
+        showfile,
+      </if>
+      <if test="adminfile != null" >
+        adminfile,
+      </if>
+      <if test="newsPar != null" >
+        news_par,
+      </if>
+      <if test="proH != null" >
+        pro_h,
+      </if>
+      <if test="proW != null" >
+        pro_w,
+      </if>
+      <if test="proPar != null" >
+        pro_par,
+      </if>
+      <if test="proRow != null" >
+        pro_row,
+      </if>
+      <if test="picH != null" >
+        pic_h,
+      </if>
+      <if test="picW != null" >
+        pic_w,
+      </if>
+      <if test="picPar != null" >
+        pic_par,
+      </if>
+      <if test="picRow != null" >
+        pic_row,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="view != null" >
+        view,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="otherpar != null" >
+        otherpar,
+      </if>
+      <if test="picotherpar != null" >
+        picotherpar,
+      </if>
+      <if test="imgotherpar != null" >
+        imgotherpar,
+      </if>
+      <if test="download != null" >
+        download,
+      </if>
+      <if test="downPar != null" >
+        down_par,
+      </if>
+      <if test="downRow != null" >
+        down_row,
+      </if>
+      <if test="ord != null" >
+        ord,
+      </if>
+      <if test="menuredirect != null" >
+        menuredirect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menu != null" >
+        #{menu,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="showfile != null" >
+        #{showfile,jdbcType=VARCHAR},
+      </if>
+      <if test="adminfile != null" >
+        #{adminfile,jdbcType=VARCHAR},
+      </if>
+      <if test="newsPar != null" >
+        #{newsPar,jdbcType=INTEGER},
+      </if>
+      <if test="proH != null" >
+        #{proH,jdbcType=INTEGER},
+      </if>
+      <if test="proW != null" >
+        #{proW,jdbcType=INTEGER},
+      </if>
+      <if test="proPar != null" >
+        #{proPar,jdbcType=INTEGER},
+      </if>
+      <if test="proRow != null" >
+        #{proRow,jdbcType=INTEGER},
+      </if>
+      <if test="picH != null" >
+        #{picH,jdbcType=INTEGER},
+      </if>
+      <if test="picW != null" >
+        #{picW,jdbcType=INTEGER},
+      </if>
+      <if test="picPar != null" >
+        #{picPar,jdbcType=INTEGER},
+      </if>
+      <if test="picRow != null" >
+        #{picRow,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="view != null" >
+        #{view,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="otherpar != null" >
+        #{otherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="picotherpar != null" >
+        #{picotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="imgotherpar != null" >
+        #{imgotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="download != null" >
+        #{download,jdbcType=INTEGER},
+      </if>
+      <if test="downPar != null" >
+        #{downPar,jdbcType=INTEGER},
+      </if>
+      <if test="downRow != null" >
+        #{downRow,jdbcType=INTEGER},
+      </if>
+      <if test="ord != null" >
+        #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="menuredirect != null" >
+        #{menuredirect,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebMenuExample" resultType="java.lang.Integer" >
+    select count(*) from web_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_menu
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menu != null" >
+        menu = #{record.menu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuType != null" >
+        menu_type = #{record.menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showfile != null" >
+        showfile = #{record.showfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminfile != null" >
+        adminfile = #{record.adminfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsPar != null" >
+        news_par = #{record.newsPar,jdbcType=INTEGER},
+      </if>
+      <if test="record.proH != null" >
+        pro_h = #{record.proH,jdbcType=INTEGER},
+      </if>
+      <if test="record.proW != null" >
+        pro_w = #{record.proW,jdbcType=INTEGER},
+      </if>
+      <if test="record.proPar != null" >
+        pro_par = #{record.proPar,jdbcType=INTEGER},
+      </if>
+      <if test="record.proRow != null" >
+        pro_row = #{record.proRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.picH != null" >
+        pic_h = #{record.picH,jdbcType=INTEGER},
+      </if>
+      <if test="record.picW != null" >
+        pic_w = #{record.picW,jdbcType=INTEGER},
+      </if>
+      <if test="record.picPar != null" >
+        pic_par = #{record.picPar,jdbcType=INTEGER},
+      </if>
+      <if test="record.picRow != null" >
+        pic_row = #{record.picRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.view != null" >
+        view = #{record.view,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.otherpar != null" >
+        otherpar = #{record.otherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picotherpar != null" >
+        picotherpar = #{record.picotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgotherpar != null" >
+        imgotherpar = #{record.imgotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.download != null" >
+        download = #{record.download,jdbcType=INTEGER},
+      </if>
+      <if test="record.downPar != null" >
+        down_par = #{record.downPar,jdbcType=INTEGER},
+      </if>
+      <if test="record.downRow != null" >
+        down_row = #{record.downRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.ord != null" >
+        ord = #{record.ord,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuredirect != null" >
+        menuredirect = #{record.menuredirect,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_menu
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      menu = #{record.menu,jdbcType=VARCHAR},
+      menu_type = #{record.menuType,jdbcType=VARCHAR},
+      showfile = #{record.showfile,jdbcType=VARCHAR},
+      adminfile = #{record.adminfile,jdbcType=VARCHAR},
+      news_par = #{record.newsPar,jdbcType=INTEGER},
+      pro_h = #{record.proH,jdbcType=INTEGER},
+      pro_w = #{record.proW,jdbcType=INTEGER},
+      pro_par = #{record.proPar,jdbcType=INTEGER},
+      pro_row = #{record.proRow,jdbcType=INTEGER},
+      pic_h = #{record.picH,jdbcType=INTEGER},
+      pic_w = #{record.picW,jdbcType=INTEGER},
+      pic_par = #{record.picPar,jdbcType=INTEGER},
+      pic_row = #{record.picRow,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      view = #{record.view,jdbcType=INTEGER},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      otherpar = #{record.otherpar,jdbcType=VARCHAR},
+      picotherpar = #{record.picotherpar,jdbcType=VARCHAR},
+      imgotherpar = #{record.imgotherpar,jdbcType=VARCHAR},
+      download = #{record.download,jdbcType=INTEGER},
+      down_par = #{record.downPar,jdbcType=INTEGER},
+      down_row = #{record.downRow,jdbcType=INTEGER},
+      ord = #{record.ord,jdbcType=INTEGER},
+      menuredirect = #{record.menuredirect,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebMenu" >
+    update web_menu
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menu != null" >
+        menu = #{menu,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        menu_type = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="showfile != null" >
+        showfile = #{showfile,jdbcType=VARCHAR},
+      </if>
+      <if test="adminfile != null" >
+        adminfile = #{adminfile,jdbcType=VARCHAR},
+      </if>
+      <if test="newsPar != null" >
+        news_par = #{newsPar,jdbcType=INTEGER},
+      </if>
+      <if test="proH != null" >
+        pro_h = #{proH,jdbcType=INTEGER},
+      </if>
+      <if test="proW != null" >
+        pro_w = #{proW,jdbcType=INTEGER},
+      </if>
+      <if test="proPar != null" >
+        pro_par = #{proPar,jdbcType=INTEGER},
+      </if>
+      <if test="proRow != null" >
+        pro_row = #{proRow,jdbcType=INTEGER},
+      </if>
+      <if test="picH != null" >
+        pic_h = #{picH,jdbcType=INTEGER},
+      </if>
+      <if test="picW != null" >
+        pic_w = #{picW,jdbcType=INTEGER},
+      </if>
+      <if test="picPar != null" >
+        pic_par = #{picPar,jdbcType=INTEGER},
+      </if>
+      <if test="picRow != null" >
+        pic_row = #{picRow,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="view != null" >
+        view = #{view,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="otherpar != null" >
+        otherpar = #{otherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="picotherpar != null" >
+        picotherpar = #{picotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="imgotherpar != null" >
+        imgotherpar = #{imgotherpar,jdbcType=VARCHAR},
+      </if>
+      <if test="download != null" >
+        download = #{download,jdbcType=INTEGER},
+      </if>
+      <if test="downPar != null" >
+        down_par = #{downPar,jdbcType=INTEGER},
+      </if>
+      <if test="downRow != null" >
+        down_row = #{downRow,jdbcType=INTEGER},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="menuredirect != null" >
+        menuredirect = #{menuredirect,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebMenu" >
+    update web_menu
+    set name = #{name,jdbcType=VARCHAR},
+      menu = #{menu,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=VARCHAR},
+      showfile = #{showfile,jdbcType=VARCHAR},
+      adminfile = #{adminfile,jdbcType=VARCHAR},
+      news_par = #{newsPar,jdbcType=INTEGER},
+      pro_h = #{proH,jdbcType=INTEGER},
+      pro_w = #{proW,jdbcType=INTEGER},
+      pro_par = #{proPar,jdbcType=INTEGER},
+      pro_row = #{proRow,jdbcType=INTEGER},
+      pic_h = #{picH,jdbcType=INTEGER},
+      pic_w = #{picW,jdbcType=INTEGER},
+      pic_par = #{picPar,jdbcType=INTEGER},
+      pic_row = #{picRow,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      view = #{view,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      otherpar = #{otherpar,jdbcType=VARCHAR},
+      picotherpar = #{picotherpar,jdbcType=VARCHAR},
+      imgotherpar = #{imgotherpar,jdbcType=VARCHAR},
+      download = #{download,jdbcType=INTEGER},
+      down_par = #{downPar,jdbcType=INTEGER},
+      down_row = #{downRow,jdbcType=INTEGER},
+      ord = #{ord,jdbcType=INTEGER},
+      menuredirect = #{menuredirect,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

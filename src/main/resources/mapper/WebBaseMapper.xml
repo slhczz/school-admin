@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebBase" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="webname" property="webname" jdbcType="VARCHAR" />
+    <result column="webkey" property="webkey" jdbcType="VARCHAR" />
+    <result column="webba" property="webba" jdbcType="VARCHAR" />
+    <result column="webjs" property="webjs" jdbcType="VARCHAR" />
+    <result column="webphone" property="webphone" jdbcType="VARCHAR" />
+    <result column="webfax" property="webfax" jdbcType="VARCHAR" />
+    <result column="webemail" property="webemail" jdbcType="VARCHAR" />
+    <result column="webbq" property="webbq" jdbcType="VARCHAR" />
+    <result column="lxfs" property="lxfs" jdbcType="VARCHAR" />
+    <result column="lxdz" property="lxdz" jdbcType="VARCHAR" />
+    <result column="config" property="config" jdbcType="INTEGER" />
+    <result column="copys" property="copys" jdbcType="INTEGER" />
+    <result column="webqq" property="webqq" jdbcType="VARCHAR" />
+    <result column="parents" property="parents" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sy.stu.school.pojo.po.WebBase" extends="BaseResultMap" >
+    <result column="webcontent" property="webcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, webname, webkey, webba, webjs, webphone, webfax, webemail, webbq, lxfs, lxdz, 
+    config, copys, webqq, parents
+  </sql>
+  <sql id="Blob_Column_List" >
+    webcontent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebBaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebBaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_base
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_base
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebBaseExample" >
+    delete from web_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebBase" >
+    insert into web_base (id, webname, webkey, 
+      webba, webjs, webphone, 
+      webfax, webemail, webbq, 
+      lxfs, lxdz, config, 
+      copys, webqq, parents, 
+      webcontent)
+    values (#{id,jdbcType=INTEGER}, #{webname,jdbcType=VARCHAR}, #{webkey,jdbcType=VARCHAR}, 
+      #{webba,jdbcType=VARCHAR}, #{webjs,jdbcType=VARCHAR}, #{webphone,jdbcType=VARCHAR}, 
+      #{webfax,jdbcType=VARCHAR}, #{webemail,jdbcType=VARCHAR}, #{webbq,jdbcType=VARCHAR}, 
+      #{lxfs,jdbcType=VARCHAR}, #{lxdz,jdbcType=VARCHAR}, #{config,jdbcType=INTEGER}, 
+      #{copys,jdbcType=INTEGER}, #{webqq,jdbcType=VARCHAR}, #{parents,jdbcType=INTEGER}, 
+      #{webcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebBase" >
+    insert into web_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="webname != null" >
+        webname,
+      </if>
+      <if test="webkey != null" >
+        webkey,
+      </if>
+      <if test="webba != null" >
+        webba,
+      </if>
+      <if test="webjs != null" >
+        webjs,
+      </if>
+      <if test="webphone != null" >
+        webphone,
+      </if>
+      <if test="webfax != null" >
+        webfax,
+      </if>
+      <if test="webemail != null" >
+        webemail,
+      </if>
+      <if test="webbq != null" >
+        webbq,
+      </if>
+      <if test="lxfs != null" >
+        lxfs,
+      </if>
+      <if test="lxdz != null" >
+        lxdz,
+      </if>
+      <if test="config != null" >
+        config,
+      </if>
+      <if test="copys != null" >
+        copys,
+      </if>
+      <if test="webqq != null" >
+        webqq,
+      </if>
+      <if test="parents != null" >
+        parents,
+      </if>
+      <if test="webcontent != null" >
+        webcontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="webname != null" >
+        #{webname,jdbcType=VARCHAR},
+      </if>
+      <if test="webkey != null" >
+        #{webkey,jdbcType=VARCHAR},
+      </if>
+      <if test="webba != null" >
+        #{webba,jdbcType=VARCHAR},
+      </if>
+      <if test="webjs != null" >
+        #{webjs,jdbcType=VARCHAR},
+      </if>
+      <if test="webphone != null" >
+        #{webphone,jdbcType=VARCHAR},
+      </if>
+      <if test="webfax != null" >
+        #{webfax,jdbcType=VARCHAR},
+      </if>
+      <if test="webemail != null" >
+        #{webemail,jdbcType=VARCHAR},
+      </if>
+      <if test="webbq != null" >
+        #{webbq,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfs != null" >
+        #{lxfs,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null" >
+        #{lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        #{config,jdbcType=INTEGER},
+      </if>
+      <if test="copys != null" >
+        #{copys,jdbcType=INTEGER},
+      </if>
+      <if test="webqq != null" >
+        #{webqq,jdbcType=VARCHAR},
+      </if>
+      <if test="parents != null" >
+        #{parents,jdbcType=INTEGER},
+      </if>
+      <if test="webcontent != null" >
+        #{webcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebBaseExample" resultType="java.lang.Integer" >
+    select count(*) from web_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_base
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.webname != null" >
+        webname = #{record.webname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webkey != null" >
+        webkey = #{record.webkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webba != null" >
+        webba = #{record.webba,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webjs != null" >
+        webjs = #{record.webjs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webphone != null" >
+        webphone = #{record.webphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webfax != null" >
+        webfax = #{record.webfax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webemail != null" >
+        webemail = #{record.webemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webbq != null" >
+        webbq = #{record.webbq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxfs != null" >
+        lxfs = #{record.lxfs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxdz != null" >
+        lxdz = #{record.lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.config != null" >
+        config = #{record.config,jdbcType=INTEGER},
+      </if>
+      <if test="record.copys != null" >
+        copys = #{record.copys,jdbcType=INTEGER},
+      </if>
+      <if test="record.webqq != null" >
+        webqq = #{record.webqq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parents != null" >
+        parents = #{record.parents,jdbcType=INTEGER},
+      </if>
+      <if test="record.webcontent != null" >
+        webcontent = #{record.webcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update web_base
+    set id = #{record.id,jdbcType=INTEGER},
+      webname = #{record.webname,jdbcType=VARCHAR},
+      webkey = #{record.webkey,jdbcType=VARCHAR},
+      webba = #{record.webba,jdbcType=VARCHAR},
+      webjs = #{record.webjs,jdbcType=VARCHAR},
+      webphone = #{record.webphone,jdbcType=VARCHAR},
+      webfax = #{record.webfax,jdbcType=VARCHAR},
+      webemail = #{record.webemail,jdbcType=VARCHAR},
+      webbq = #{record.webbq,jdbcType=VARCHAR},
+      lxfs = #{record.lxfs,jdbcType=VARCHAR},
+      lxdz = #{record.lxdz,jdbcType=VARCHAR},
+      config = #{record.config,jdbcType=INTEGER},
+      copys = #{record.copys,jdbcType=INTEGER},
+      webqq = #{record.webqq,jdbcType=VARCHAR},
+      parents = #{record.parents,jdbcType=INTEGER},
+      webcontent = #{record.webcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_base
+    set id = #{record.id,jdbcType=INTEGER},
+      webname = #{record.webname,jdbcType=VARCHAR},
+      webkey = #{record.webkey,jdbcType=VARCHAR},
+      webba = #{record.webba,jdbcType=VARCHAR},
+      webjs = #{record.webjs,jdbcType=VARCHAR},
+      webphone = #{record.webphone,jdbcType=VARCHAR},
+      webfax = #{record.webfax,jdbcType=VARCHAR},
+      webemail = #{record.webemail,jdbcType=VARCHAR},
+      webbq = #{record.webbq,jdbcType=VARCHAR},
+      lxfs = #{record.lxfs,jdbcType=VARCHAR},
+      lxdz = #{record.lxdz,jdbcType=VARCHAR},
+      config = #{record.config,jdbcType=INTEGER},
+      copys = #{record.copys,jdbcType=INTEGER},
+      webqq = #{record.webqq,jdbcType=VARCHAR},
+      parents = #{record.parents,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebBase" >
+    update web_base
+    <set >
+      <if test="webname != null" >
+        webname = #{webname,jdbcType=VARCHAR},
+      </if>
+      <if test="webkey != null" >
+        webkey = #{webkey,jdbcType=VARCHAR},
+      </if>
+      <if test="webba != null" >
+        webba = #{webba,jdbcType=VARCHAR},
+      </if>
+      <if test="webjs != null" >
+        webjs = #{webjs,jdbcType=VARCHAR},
+      </if>
+      <if test="webphone != null" >
+        webphone = #{webphone,jdbcType=VARCHAR},
+      </if>
+      <if test="webfax != null" >
+        webfax = #{webfax,jdbcType=VARCHAR},
+      </if>
+      <if test="webemail != null" >
+        webemail = #{webemail,jdbcType=VARCHAR},
+      </if>
+      <if test="webbq != null" >
+        webbq = #{webbq,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfs != null" >
+        lxfs = #{lxfs,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null" >
+        lxdz = #{lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        config = #{config,jdbcType=INTEGER},
+      </if>
+      <if test="copys != null" >
+        copys = #{copys,jdbcType=INTEGER},
+      </if>
+      <if test="webqq != null" >
+        webqq = #{webqq,jdbcType=VARCHAR},
+      </if>
+      <if test="parents != null" >
+        parents = #{parents,jdbcType=INTEGER},
+      </if>
+      <if test="webcontent != null" >
+        webcontent = #{webcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebBase" >
+    update web_base
+    set webname = #{webname,jdbcType=VARCHAR},
+      webkey = #{webkey,jdbcType=VARCHAR},
+      webba = #{webba,jdbcType=VARCHAR},
+      webjs = #{webjs,jdbcType=VARCHAR},
+      webphone = #{webphone,jdbcType=VARCHAR},
+      webfax = #{webfax,jdbcType=VARCHAR},
+      webemail = #{webemail,jdbcType=VARCHAR},
+      webbq = #{webbq,jdbcType=VARCHAR},
+      lxfs = #{lxfs,jdbcType=VARCHAR},
+      lxdz = #{lxdz,jdbcType=VARCHAR},
+      config = #{config,jdbcType=INTEGER},
+      copys = #{copys,jdbcType=INTEGER},
+      webqq = #{webqq,jdbcType=VARCHAR},
+      parents = #{parents,jdbcType=INTEGER},
+      webcontent = #{webcontent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebBase" >
+    update web_base
+    set webname = #{webname,jdbcType=VARCHAR},
+      webkey = #{webkey,jdbcType=VARCHAR},
+      webba = #{webba,jdbcType=VARCHAR},
+      webjs = #{webjs,jdbcType=VARCHAR},
+      webphone = #{webphone,jdbcType=VARCHAR},
+      webfax = #{webfax,jdbcType=VARCHAR},
+      webemail = #{webemail,jdbcType=VARCHAR},
+      webbq = #{webbq,jdbcType=VARCHAR},
+      lxfs = #{lxfs,jdbcType=VARCHAR},
+      lxdz = #{lxdz,jdbcType=VARCHAR},
+      config = #{config,jdbcType=INTEGER},
+      copys = #{copys,jdbcType=INTEGER},
+      webqq = #{webqq,jdbcType=VARCHAR},
+      parents = #{parents,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

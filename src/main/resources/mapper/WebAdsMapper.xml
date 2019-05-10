@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebAdsMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebAds" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="colors" property="colors" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="stime" property="stime" jdbcType="TIMESTAMP" />
+    <result column="etime" property="etime" jdbcType="TIMESTAMP" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sy.stu.school.pojo.po.WebAds" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, colors, pic, stime, etime, addtime, sort, bid, sid, tid, fid, url
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebAdsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_ads
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebAdsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_ads
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_ads
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_ads
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebAdsExample" >
+    delete from web_ads
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebAds" >
+    insert into web_ads (id, title, colors, 
+      pic, stime, etime, 
+      addtime, sort, bid, 
+      sid, tid, fid, url, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{colors,jdbcType=VARCHAR}, 
+      #{pic,jdbcType=VARCHAR}, #{stime,jdbcType=TIMESTAMP}, #{etime,jdbcType=TIMESTAMP}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebAds" >
+    insert into web_ads
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="colors != null" >
+        colors,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="stime != null" >
+        stime,
+      </if>
+      <if test="etime != null" >
+        etime,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null" >
+        #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebAdsExample" resultType="java.lang.Integer" >
+    select count(*) from web_ads
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_ads
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colors != null" >
+        colors = #{record.colors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        pic = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stime != null" >
+        stime = #{record.stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.etime != null" >
+        etime = #{record.etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update web_ads
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      colors = #{record.colors,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      stime = #{record.stime,jdbcType=TIMESTAMP},
+      etime = #{record.etime,jdbcType=TIMESTAMP},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_ads
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      colors = #{record.colors,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      stime = #{record.stime,jdbcType=TIMESTAMP},
+      etime = #{record.etime,jdbcType=TIMESTAMP},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebAds" >
+    update web_ads
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null" >
+        colors = #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        stime = #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        etime = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebAds" >
+    update web_ads
+    set title = #{title,jdbcType=VARCHAR},
+      colors = #{colors,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      stime = #{stime,jdbcType=TIMESTAMP},
+      etime = #{etime,jdbcType=TIMESTAMP},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebAds" >
+    update web_ads
+    set title = #{title,jdbcType=VARCHAR},
+      colors = #{colors,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      stime = #{stime,jdbcType=TIMESTAMP},
+      etime = #{etime,jdbcType=TIMESTAMP},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

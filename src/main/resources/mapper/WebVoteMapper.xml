@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebVoteMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebVote" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="colors" property="colors" jdbcType="VARCHAR" />
+    <result column="item1" property="item1" jdbcType="VARCHAR" />
+    <result column="item2" property="item2" jdbcType="VARCHAR" />
+    <result column="item3" property="item3" jdbcType="VARCHAR" />
+    <result column="item4" property="item4" jdbcType="VARCHAR" />
+    <result column="item5" property="item5" jdbcType="VARCHAR" />
+    <result column="item6" property="item6" jdbcType="VARCHAR" />
+    <result column="item7" property="item7" jdbcType="VARCHAR" />
+    <result column="item8" property="item8" jdbcType="VARCHAR" />
+    <result column="item9" property="item9" jdbcType="VARCHAR" />
+    <result column="item10" property="item10" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="ps1" property="ps1" jdbcType="VARCHAR" />
+    <result column="ps2" property="ps2" jdbcType="VARCHAR" />
+    <result column="ps3" property="ps3" jdbcType="VARCHAR" />
+    <result column="ps4" property="ps4" jdbcType="VARCHAR" />
+    <result column="ps5" property="ps5" jdbcType="VARCHAR" />
+    <result column="ps6" property="ps6" jdbcType="VARCHAR" />
+    <result column="ps7" property="ps7" jdbcType="VARCHAR" />
+    <result column="ps8" property="ps8" jdbcType="VARCHAR" />
+    <result column="ps9" property="ps9" jdbcType="VARCHAR" />
+    <result column="ps10" property="ps10" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sy.stu.school.pojo.po.WebVote" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, colors, item1, item2, item3, item4, item5, item6, item7, item8, item9, 
+    item10, state, addtime, sort, bid, sid, tid, fid, ps1, ps2, ps3, ps4, ps5, ps6, ps7, 
+    ps8, ps9, ps10
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebVoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_vote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebVoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_vote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_vote
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_vote
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebVoteExample" >
+    delete from web_vote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebVote" >
+    insert into web_vote (id, title, colors, 
+      item1, item2, item3, 
+      item4, item5, item6, 
+      item7, item8, item9, 
+      item10, state, addtime, 
+      sort, bid, sid, tid, 
+      fid, ps1, ps2, ps3, 
+      ps4, ps5, ps6, ps7, 
+      ps8, ps9, ps10, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{colors,jdbcType=VARCHAR}, 
+      #{item1,jdbcType=VARCHAR}, #{item2,jdbcType=VARCHAR}, #{item3,jdbcType=VARCHAR}, 
+      #{item4,jdbcType=VARCHAR}, #{item5,jdbcType=VARCHAR}, #{item6,jdbcType=VARCHAR}, 
+      #{item7,jdbcType=VARCHAR}, #{item8,jdbcType=VARCHAR}, #{item9,jdbcType=VARCHAR}, 
+      #{item10,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, 
+      #{fid,jdbcType=INTEGER}, #{ps1,jdbcType=VARCHAR}, #{ps2,jdbcType=VARCHAR}, #{ps3,jdbcType=VARCHAR}, 
+      #{ps4,jdbcType=VARCHAR}, #{ps5,jdbcType=VARCHAR}, #{ps6,jdbcType=VARCHAR}, #{ps7,jdbcType=VARCHAR}, 
+      #{ps8,jdbcType=VARCHAR}, #{ps9,jdbcType=VARCHAR}, #{ps10,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebVote" >
+    insert into web_vote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="colors != null" >
+        colors,
+      </if>
+      <if test="item1 != null" >
+        item1,
+      </if>
+      <if test="item2 != null" >
+        item2,
+      </if>
+      <if test="item3 != null" >
+        item3,
+      </if>
+      <if test="item4 != null" >
+        item4,
+      </if>
+      <if test="item5 != null" >
+        item5,
+      </if>
+      <if test="item6 != null" >
+        item6,
+      </if>
+      <if test="item7 != null" >
+        item7,
+      </if>
+      <if test="item8 != null" >
+        item8,
+      </if>
+      <if test="item9 != null" >
+        item9,
+      </if>
+      <if test="item10 != null" >
+        item10,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="ps1 != null" >
+        ps1,
+      </if>
+      <if test="ps2 != null" >
+        ps2,
+      </if>
+      <if test="ps3 != null" >
+        ps3,
+      </if>
+      <if test="ps4 != null" >
+        ps4,
+      </if>
+      <if test="ps5 != null" >
+        ps5,
+      </if>
+      <if test="ps6 != null" >
+        ps6,
+      </if>
+      <if test="ps7 != null" >
+        ps7,
+      </if>
+      <if test="ps8 != null" >
+        ps8,
+      </if>
+      <if test="ps9 != null" >
+        ps9,
+      </if>
+      <if test="ps10 != null" >
+        ps10,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null" >
+        #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="item1 != null" >
+        #{item1,jdbcType=VARCHAR},
+      </if>
+      <if test="item2 != null" >
+        #{item2,jdbcType=VARCHAR},
+      </if>
+      <if test="item3 != null" >
+        #{item3,jdbcType=VARCHAR},
+      </if>
+      <if test="item4 != null" >
+        #{item4,jdbcType=VARCHAR},
+      </if>
+      <if test="item5 != null" >
+        #{item5,jdbcType=VARCHAR},
+      </if>
+      <if test="item6 != null" >
+        #{item6,jdbcType=VARCHAR},
+      </if>
+      <if test="item7 != null" >
+        #{item7,jdbcType=VARCHAR},
+      </if>
+      <if test="item8 != null" >
+        #{item8,jdbcType=VARCHAR},
+      </if>
+      <if test="item9 != null" >
+        #{item9,jdbcType=VARCHAR},
+      </if>
+      <if test="item10 != null" >
+        #{item10,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ps1 != null" >
+        #{ps1,jdbcType=VARCHAR},
+      </if>
+      <if test="ps2 != null" >
+        #{ps2,jdbcType=VARCHAR},
+      </if>
+      <if test="ps3 != null" >
+        #{ps3,jdbcType=VARCHAR},
+      </if>
+      <if test="ps4 != null" >
+        #{ps4,jdbcType=VARCHAR},
+      </if>
+      <if test="ps5 != null" >
+        #{ps5,jdbcType=VARCHAR},
+      </if>
+      <if test="ps6 != null" >
+        #{ps6,jdbcType=VARCHAR},
+      </if>
+      <if test="ps7 != null" >
+        #{ps7,jdbcType=VARCHAR},
+      </if>
+      <if test="ps8 != null" >
+        #{ps8,jdbcType=VARCHAR},
+      </if>
+      <if test="ps9 != null" >
+        #{ps9,jdbcType=VARCHAR},
+      </if>
+      <if test="ps10 != null" >
+        #{ps10,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebVoteExample" resultType="java.lang.Integer" >
+    select count(*) from web_vote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_vote
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colors != null" >
+        colors = #{record.colors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item1 != null" >
+        item1 = #{record.item1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item2 != null" >
+        item2 = #{record.item2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item3 != null" >
+        item3 = #{record.item3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item4 != null" >
+        item4 = #{record.item4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item5 != null" >
+        item5 = #{record.item5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item6 != null" >
+        item6 = #{record.item6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item7 != null" >
+        item7 = #{record.item7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item8 != null" >
+        item8 = #{record.item8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item9 != null" >
+        item9 = #{record.item9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item10 != null" >
+        item10 = #{record.item10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ps1 != null" >
+        ps1 = #{record.ps1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps2 != null" >
+        ps2 = #{record.ps2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps3 != null" >
+        ps3 = #{record.ps3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps4 != null" >
+        ps4 = #{record.ps4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps5 != null" >
+        ps5 = #{record.ps5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps6 != null" >
+        ps6 = #{record.ps6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps7 != null" >
+        ps7 = #{record.ps7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps8 != null" >
+        ps8 = #{record.ps8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps9 != null" >
+        ps9 = #{record.ps9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps10 != null" >
+        ps10 = #{record.ps10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update web_vote
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      colors = #{record.colors,jdbcType=VARCHAR},
+      item1 = #{record.item1,jdbcType=VARCHAR},
+      item2 = #{record.item2,jdbcType=VARCHAR},
+      item3 = #{record.item3,jdbcType=VARCHAR},
+      item4 = #{record.item4,jdbcType=VARCHAR},
+      item5 = #{record.item5,jdbcType=VARCHAR},
+      item6 = #{record.item6,jdbcType=VARCHAR},
+      item7 = #{record.item7,jdbcType=VARCHAR},
+      item8 = #{record.item8,jdbcType=VARCHAR},
+      item9 = #{record.item9,jdbcType=VARCHAR},
+      item10 = #{record.item10,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      ps1 = #{record.ps1,jdbcType=VARCHAR},
+      ps2 = #{record.ps2,jdbcType=VARCHAR},
+      ps3 = #{record.ps3,jdbcType=VARCHAR},
+      ps4 = #{record.ps4,jdbcType=VARCHAR},
+      ps5 = #{record.ps5,jdbcType=VARCHAR},
+      ps6 = #{record.ps6,jdbcType=VARCHAR},
+      ps7 = #{record.ps7,jdbcType=VARCHAR},
+      ps8 = #{record.ps8,jdbcType=VARCHAR},
+      ps9 = #{record.ps9,jdbcType=VARCHAR},
+      ps10 = #{record.ps10,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_vote
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      colors = #{record.colors,jdbcType=VARCHAR},
+      item1 = #{record.item1,jdbcType=VARCHAR},
+      item2 = #{record.item2,jdbcType=VARCHAR},
+      item3 = #{record.item3,jdbcType=VARCHAR},
+      item4 = #{record.item4,jdbcType=VARCHAR},
+      item5 = #{record.item5,jdbcType=VARCHAR},
+      item6 = #{record.item6,jdbcType=VARCHAR},
+      item7 = #{record.item7,jdbcType=VARCHAR},
+      item8 = #{record.item8,jdbcType=VARCHAR},
+      item9 = #{record.item9,jdbcType=VARCHAR},
+      item10 = #{record.item10,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      fid = #{record.fid,jdbcType=INTEGER},
+      ps1 = #{record.ps1,jdbcType=VARCHAR},
+      ps2 = #{record.ps2,jdbcType=VARCHAR},
+      ps3 = #{record.ps3,jdbcType=VARCHAR},
+      ps4 = #{record.ps4,jdbcType=VARCHAR},
+      ps5 = #{record.ps5,jdbcType=VARCHAR},
+      ps6 = #{record.ps6,jdbcType=VARCHAR},
+      ps7 = #{record.ps7,jdbcType=VARCHAR},
+      ps8 = #{record.ps8,jdbcType=VARCHAR},
+      ps9 = #{record.ps9,jdbcType=VARCHAR},
+      ps10 = #{record.ps10,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebVote" >
+    update web_vote
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null" >
+        colors = #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="item1 != null" >
+        item1 = #{item1,jdbcType=VARCHAR},
+      </if>
+      <if test="item2 != null" >
+        item2 = #{item2,jdbcType=VARCHAR},
+      </if>
+      <if test="item3 != null" >
+        item3 = #{item3,jdbcType=VARCHAR},
+      </if>
+      <if test="item4 != null" >
+        item4 = #{item4,jdbcType=VARCHAR},
+      </if>
+      <if test="item5 != null" >
+        item5 = #{item5,jdbcType=VARCHAR},
+      </if>
+      <if test="item6 != null" >
+        item6 = #{item6,jdbcType=VARCHAR},
+      </if>
+      <if test="item7 != null" >
+        item7 = #{item7,jdbcType=VARCHAR},
+      </if>
+      <if test="item8 != null" >
+        item8 = #{item8,jdbcType=VARCHAR},
+      </if>
+      <if test="item9 != null" >
+        item9 = #{item9,jdbcType=VARCHAR},
+      </if>
+      <if test="item10 != null" >
+        item10 = #{item10,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ps1 != null" >
+        ps1 = #{ps1,jdbcType=VARCHAR},
+      </if>
+      <if test="ps2 != null" >
+        ps2 = #{ps2,jdbcType=VARCHAR},
+      </if>
+      <if test="ps3 != null" >
+        ps3 = #{ps3,jdbcType=VARCHAR},
+      </if>
+      <if test="ps4 != null" >
+        ps4 = #{ps4,jdbcType=VARCHAR},
+      </if>
+      <if test="ps5 != null" >
+        ps5 = #{ps5,jdbcType=VARCHAR},
+      </if>
+      <if test="ps6 != null" >
+        ps6 = #{ps6,jdbcType=VARCHAR},
+      </if>
+      <if test="ps7 != null" >
+        ps7 = #{ps7,jdbcType=VARCHAR},
+      </if>
+      <if test="ps8 != null" >
+        ps8 = #{ps8,jdbcType=VARCHAR},
+      </if>
+      <if test="ps9 != null" >
+        ps9 = #{ps9,jdbcType=VARCHAR},
+      </if>
+      <if test="ps10 != null" >
+        ps10 = #{ps10,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebVote" >
+    update web_vote
+    set title = #{title,jdbcType=VARCHAR},
+      colors = #{colors,jdbcType=VARCHAR},
+      item1 = #{item1,jdbcType=VARCHAR},
+      item2 = #{item2,jdbcType=VARCHAR},
+      item3 = #{item3,jdbcType=VARCHAR},
+      item4 = #{item4,jdbcType=VARCHAR},
+      item5 = #{item5,jdbcType=VARCHAR},
+      item6 = #{item6,jdbcType=VARCHAR},
+      item7 = #{item7,jdbcType=VARCHAR},
+      item8 = #{item8,jdbcType=VARCHAR},
+      item9 = #{item9,jdbcType=VARCHAR},
+      item10 = #{item10,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      ps1 = #{ps1,jdbcType=VARCHAR},
+      ps2 = #{ps2,jdbcType=VARCHAR},
+      ps3 = #{ps3,jdbcType=VARCHAR},
+      ps4 = #{ps4,jdbcType=VARCHAR},
+      ps5 = #{ps5,jdbcType=VARCHAR},
+      ps6 = #{ps6,jdbcType=VARCHAR},
+      ps7 = #{ps7,jdbcType=VARCHAR},
+      ps8 = #{ps8,jdbcType=VARCHAR},
+      ps9 = #{ps9,jdbcType=VARCHAR},
+      ps10 = #{ps10,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebVote" >
+    update web_vote
+    set title = #{title,jdbcType=VARCHAR},
+      colors = #{colors,jdbcType=VARCHAR},
+      item1 = #{item1,jdbcType=VARCHAR},
+      item2 = #{item2,jdbcType=VARCHAR},
+      item3 = #{item3,jdbcType=VARCHAR},
+      item4 = #{item4,jdbcType=VARCHAR},
+      item5 = #{item5,jdbcType=VARCHAR},
+      item6 = #{item6,jdbcType=VARCHAR},
+      item7 = #{item7,jdbcType=VARCHAR},
+      item8 = #{item8,jdbcType=VARCHAR},
+      item9 = #{item9,jdbcType=VARCHAR},
+      item10 = #{item10,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      ps1 = #{ps1,jdbcType=VARCHAR},
+      ps2 = #{ps2,jdbcType=VARCHAR},
+      ps3 = #{ps3,jdbcType=VARCHAR},
+      ps4 = #{ps4,jdbcType=VARCHAR},
+      ps5 = #{ps5,jdbcType=VARCHAR},
+      ps6 = #{ps6,jdbcType=VARCHAR},
+      ps7 = #{ps7,jdbcType=VARCHAR},
+      ps8 = #{ps8,jdbcType=VARCHAR},
+      ps9 = #{ps9,jdbcType=VARCHAR},
+      ps10 = #{ps10,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

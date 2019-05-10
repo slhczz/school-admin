@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.stu.school.dao.WebJobslistMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.stu.school.pojo.po.WebJobslist" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="getid" property="getid" jdbcType="INTEGER" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="dates" property="dates" jdbcType="TIMESTAMP" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sy.stu.school.pojo.po.WebJobslistWithBLOBs" extends="BaseResultMap" >
+    <result column="jl" property="jl" jdbcType="LONGVARCHAR" />
+    <result column="pj" property="pj" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, getid, realname, sex, dates, tel
+  </sql>
+  <sql id="Blob_Column_List" >
+    jl, pj
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebJobslistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_jobslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.stu.school.pojo.po.WebJobslistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_jobslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_jobslist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_jobslist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.stu.school.pojo.po.WebJobslistExample" >
+    delete from web_jobslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.stu.school.pojo.po.WebJobslistWithBLOBs" >
+    insert into web_jobslist (id, title, getid, 
+      realname, sex, dates, 
+      tel, jl, pj
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{getid,jdbcType=INTEGER}, 
+      #{realname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{dates,jdbcType=TIMESTAMP}, 
+      #{tel,jdbcType=VARCHAR}, #{jl,jdbcType=LONGVARCHAR}, #{pj,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.stu.school.pojo.po.WebJobslistWithBLOBs" >
+    insert into web_jobslist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="getid != null" >
+        getid,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="dates != null" >
+        dates,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="jl != null" >
+        jl,
+      </if>
+      <if test="pj != null" >
+        pj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="getid != null" >
+        #{getid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="dates != null" >
+        #{dates,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="jl != null" >
+        #{jl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pj != null" >
+        #{pj,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.stu.school.pojo.po.WebJobslistExample" resultType="java.lang.Integer" >
+    select count(*) from web_jobslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update web_jobslist
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getid != null" >
+        getid = #{record.getid,jdbcType=INTEGER},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dates != null" >
+        dates = #{record.dates,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jl != null" >
+        jl = #{record.jl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pj != null" >
+        pj = #{record.pj,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update web_jobslist
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      getid = #{record.getid,jdbcType=INTEGER},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      dates = #{record.dates,jdbcType=TIMESTAMP},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      jl = #{record.jl,jdbcType=LONGVARCHAR},
+      pj = #{record.pj,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update web_jobslist
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      getid = #{record.getid,jdbcType=INTEGER},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      dates = #{record.dates,jdbcType=TIMESTAMP},
+      tel = #{record.tel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.stu.school.pojo.po.WebJobslistWithBLOBs" >
+    update web_jobslist
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="getid != null" >
+        getid = #{getid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="dates != null" >
+        dates = #{dates,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="jl != null" >
+        jl = #{jl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pj != null" >
+        pj = #{pj,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sy.stu.school.pojo.po.WebJobslistWithBLOBs" >
+    update web_jobslist
+    set title = #{title,jdbcType=VARCHAR},
+      getid = #{getid,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dates = #{dates,jdbcType=TIMESTAMP},
+      tel = #{tel,jdbcType=VARCHAR},
+      jl = #{jl,jdbcType=LONGVARCHAR},
+      pj = #{pj,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.stu.school.pojo.po.WebJobslist" >
+    update web_jobslist
+    set title = #{title,jdbcType=VARCHAR},
+      getid = #{getid,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dates = #{dates,jdbcType=TIMESTAMP},
+      tel = #{tel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
